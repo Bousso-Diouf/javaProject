@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupeisi.minisystemebancaire.controllers.admin.AdminSupportController">
+
+    <!-- Sidebar à gauche -->
+    <left>
+        <VBox alignment="TOP_LEFT" spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 18px;" text="SUNU BANK" />
+            <Button fx:id="btnDashboard" onAction="#handleDashboard" style="-fx-pref-width: 180px;" text="🏠 Tableau de Bord" />
+            <Button fx:id="btnClients" onAction="#handleGestionClients" style="-fx-pref-width: 180px;" text="👥 Gestion des Clients" />
+            <Button fx:id="btnComptes" onAction="#handleGestionComptes" style="-fx-pref-width: 180px;" text="💰 Gestion des Comptes" />
+            <Button fx:id="btnTransactions" onAction="#handleGestionTransactions" style="-fx-pref-width: 180px;" text="🔄 Transactions" />
+            <Button fx:id="btnCredits" onAction="#handleGestionCredits" style="-fx-pref-width: 180px;" text="🏦 Crédits" />
+            <Button fx:id="btnCartes" onAction="#handleGestionCartes" style="-fx-pref-width: 180px;" text="💳 Cartes Bancaires" />
+            <Button fx:id="btnSupport" style="-fx-pref-width: 180px;" text="📩 Service Client &amp; Rapports" />
+            <Button fx:id="btnDeconnexion" style="-fx-pref-width: 180px; -fx-background-color: red; -fx-text-fill: white;" text="🚪 Déconnexion" />
+        </VBox>
+    </left>
+
+    <!-- Contenu principal -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20;">
+            
+            <!-- Titre -->
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="📩 Service Client et Rapports" />
+
+            <!-- Rechercher un ticket -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 16px;" text="🔍 Rechercher un ticket :" />
+                <TextField fx:id="txtRechercheTicket" promptText="Entrez un ID ou un sujet" />
+                <Button fx:id="btnRechercherTicket" onAction="#handleRechercherTicket" text="🔍 Rechercher" />
+            </HBox>
+
+            <!-- Liste des Tickets Support -->
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="📋 Tickets de Support Client" />
+            <TableView fx:id="tableTickets" prefHeight="200" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colIdTicket" prefWidth="50" text="ID" />
+                    <TableColumn fx:id="colClientTicket" prefWidth="150" text="Client" />
+                    <TableColumn fx:id="colSujetTicket" prefWidth="200" text="Sujet" />
+                    <TableColumn fx:id="colStatutTicket" prefWidth="100" text="Statut" />
+                    <TableColumn fx:id="colActionTicket" prefWidth="150" text="Action" />
+                </columns>
+            </TableView>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="btnRepondreTicket" onAction="#handleRepondreTicket" style="-fx-font-size: 14px;" text="✉ Répondre" />
+                <Button fx:id="btnResoudreTicket" onAction="#handleResoudreTicket" style="-fx-font-size: 14px;" text="✅ Marquer comme Résolu" />
+            </HBox>
+
+            <!-- Générer un Rapport -->
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="📊 Génération de Rapports" />
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Type de Rapport :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <ChoiceBox fx:id="choiceTypeRapport" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Période :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ChoiceBox fx:id="choicePeriodeRapport" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="btnGenererPdf" onAction="#handleGenererRapport" style="-fx-font-size: 14px;" text="📥 Générer PDF" />
+                <Button fx:id="btnGenererExcel" style="-fx-font-size: 14px;" text="📊 Générer Excel" />
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

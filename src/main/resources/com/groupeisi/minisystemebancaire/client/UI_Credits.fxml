@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupeisi.minisystemebancaire.controllers.client.ClientCreditsController">
+
+    <!-- Sidebar à gauche -->
+    <left>
+        <VBox alignment="TOP_LEFT" spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 18px;" text="🏦 Mini Système Bancaire" />
+            <Button fx:id="btnDashboard" onAction="#goToDashboard" style="-fx-pref-width: 180px;" text="🏠 Tableau de Bord" />
+            <Button fx:id="btnTransactions" onAction="#goToTransactions" style="-fx-pref-width: 180px;" text="🔄 Transactions" />
+            <Button fx:id="btnCredits" onAction="#goToCredits" style="-fx-pref-width: 180px;" text="🏦 Crédits" />
+            <Button fx:id="btnCartes" onAction="#goToCartes" style="-fx-pref-width: 180px;" text="💳 Cartes Bancaires" />
+            <Button fx:id="btnSupport" onAction="#goToSupport" style="-fx-pref-width: 180px;" text="📩 Service Client" />
+            <Button fx:id="btnDeconnexion" onAction="#handleLogout" style="-fx-pref-width: 180px; -fx-background-color: red; -fx-text-fill: white;" text="🚪 Déconnexion" />
+        </VBox>
+    </left>
+
+    <!-- Contenu principal -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20;">
+
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Demander de Crédit" />
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Montant du Crédit :" />
+                <TextField fx:id="txtMontantCredit" promptText="Entrez un montant" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Durée (en mois) :" />
+                <TextField fx:id="txtDureeCredit" promptText="Ex: 12 mois" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Taux d'intérêt (%) :" />
+                <TextField fx:id="txtTauxInteret" promptText="Ex: 5%" />
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="btnDemanderCredit" onAction="#handleDemanderCredit" text="🏦 Demander Crédit" />
+                <Button fx:id="btnAnnulerCredit" onAction="#clearFields" text="❌ Annuler" />
+            </HBox>
+
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="🔍 Suivi des Crédits" />
+            <TableView fx:id="tableCredits" prefHeight="200" prefWidth="450">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="50" text="ID" />
+                    <TableColumn fx:id="colMontant" prefWidth="100" text="Montant" />
+                    <TableColumn fx:id="colDuree" prefWidth="100" text="Durée (mois)" />
+                    <TableColumn fx:id="colMensualite" prefWidth="100" text="Mensualité" />
+                    <TableColumn fx:id="colStatut" prefWidth="100" text="Statut" />
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>

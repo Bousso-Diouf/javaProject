@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupeisi.minisystemebancaire.controllers.admin.AdminComptesController">
+
+    <!-- Sidebar à gauche -->
+    <left>
+        <VBox spacing="10" alignment="TOP_LEFT" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label text="🏦 Mini Système Bancaire" style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+            <Button text="🏠 Tableau de Bord" fx:id="btnDashboard" onAction="#handleDashboard" style="-fx-pref-width: 180px;"/>
+            <Button text="👥 Gestion des Clients" fx:id="btnClients" onAction="#handleGestionClients" style="-fx-pref-width: 180px;"/>
+            <Button text="💰 Gestion des Comptes" fx:id="btnComptes"  style="-fx-pref-width: 180px;"/>
+            <Button text="🔄 Transactions" fx:id="btnTransactions" onAction="#handleGestionTransactions" style="-fx-pref-width: 180px;"/>
+            <Button text="🏦 Crédits" fx:id="btnCredits" onAction="#handleGestionCredits" style="-fx-pref-width: 180px;"/>
+            <Button text="💳 Cartes Bancaires" fx:id="btnCartes" onAction="#handleGestionCartes" style="-fx-pref-width: 180px;"/>
+            <Button text="📩 Service Client &amp; Rapports" fx:id="btnSupport" onAction="#handleGestionSupport" style="-fx-pref-width: 180px;"/>
+            <Button text="🚪 Déconnexion" fx:id="btnDeconnexion" style="-fx-pref-width: 180px; -fx-background-color: red; -fx-text-fill: white;"/>
+        </VBox>
+    </left>
+
+    <!-- Contenu principal -->
+    <center>
+        <VBox spacing="20" alignment="TOP_CENTER" style="-fx-padding: 20;">
+            
+            <!-- Titre -->
+            <Label text="💰 Gestion des Comptes Bancaires" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <!-- Rechercher un compte -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="🔍 Rechercher un compte :" style="-fx-font-size: 16px;"/>
+                <TextField fx:id="txtRechercheCompte" promptText="Entrez un numéro de compte"/>
+                <Button text="🔍 Rechercher" fx:id="btnRechercherCompte"/>
+            </HBox>
+
+            <!-- Ouvrir un compte -->
+            <Label text="🆕 Ouvrir un Compte" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            
+            <GridPane hgap="10" vgap="10">
+                <Label text="Client :" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <ChoiceBox fx:id="choiceClient" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Type de Compte :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <ChoiceBox fx:id="choiceTypeCompte" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Solde Initial :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="txtSoldeInitial" promptText="Montant" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="✅ Ouvrir" fx:id="btnOuvrirCompte" onAction="#handleOuvrirCompte" style="-fx-font-size: 14px;"/>
+                <Button text="❌ Annuler" fx:id="btnAnnulerCompte"  onAction="#handleAnnulerCompte" style="-fx-font-size: 14px;"/>
+            </HBox>
+
+            <!-- Appliquer des frais bancaires -->
+            <Label text="💰 Appliquer des Frais Bancaires" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Compte :" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <ChoiceBox fx:id="choiceCompteFrais" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Type de Frais :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <ChoiceBox fx:id="choiceTypeFrais" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Montant :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="txtMontantFrais" promptText="Montant" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="💰 Appliquer" fx:id="btnAppliquerFrais" onAction="#handleAppliquerFrais" style="-fx-font-size: 14px;"/>
+            </HBox>
+
+            <!-- Liste des Comptes -->
+            <Label text="📋 Liste des Comptes" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tableComptes" prefHeight="200" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colNumeroCompte" text="Numéro" prefWidth="100"/>
+                    <TableColumn fx:id="colClient" text="Client" prefWidth="150"/>
+                    <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
+                    <TableColumn fx:id="colSolde" text="Solde" prefWidth="100"/>
+                    <TableColumn fx:id="colStatut" text="Statut" prefWidth="100"/>
+                    <TableColumn fx:id="colAction" text="Action" prefWidth="150"/>
+                </columns>
+            </TableView>
+
+            <!-- Boutons de Gestion des Comptes -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="🔄 Modifier" fx:id="btnModifierCompte" onAction="#handleModifierCompte" style="-fx-font-size: 14px;"/>
+                <Button text="⛔ Fermer" fx:id="btnFermerCompte" onAction="#handleFermerCompte" style="-fx-font-size: 14px;"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

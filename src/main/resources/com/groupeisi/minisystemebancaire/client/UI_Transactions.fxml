@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.groupeisi.minisystemebancaire.controllers.client.ClientTransactionsController">
+
+    <!-- Sidebar à gauche -->
+    <left>
+        <VBox spacing="10" alignment="TOP_LEFT" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label text="🏦 Mini Système Bancaire" style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+            <Button text="🏠 Tableau de Bord" fx:id="btnDashboard" onAction="#goToDashboard" style="-fx-pref-width: 180px;"/>
+            <Button text="🔄 Transactions" fx:id="btnTransactions" onAction="#goToTransactions" style="-fx-pref-width: 180px;"/>
+            <Button text="🏦 Crédits" fx:id="btnCredits" onAction="#goToCredits" style="-fx-pref-width: 180px;"/>
+            <Button text="💳 Cartes Bancaires" fx:id="btnCartes" onAction="#goToCartes" style="-fx-pref-width: 180px;"/>
+            <Button text="📩 Service Client" fx:id="btnSupport" onAction="#goToSupport" style="-fx-pref-width: 180px;"/>
+            <Button text="🚪 Déconnexion" fx:id="btnDeconnexion" onAction="#handleLogout" style="-fx-pref-width: 180px; -fx-background-color: red; -fx-text-fill: white;"/>
+        </VBox>
+    </left>
+
+    <!-- Contenu principal corrigé -->
+    <center>
+        <VBox spacing="20" alignment="TOP_CENTER" style="-fx-padding: 20;">
+
+            <!-- Titre -->
+            <Label text="Effectuer une Transaction" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <!-- Sélection du type de transaction - CORRIGÉ -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Type : " style="-fx-font-size: 16px;"/>
+                <ChoiceBox fx:id="transactionType" prefWidth="150"/>
+            </HBox>
+
+            <!-- Montant - CORRIGÉ -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Montant : " style="-fx-font-size: 16px;"/>
+                <TextField fx:id="montantField" promptText="Entrez un montant"/>
+            </HBox>
+
+            <!-- Compte source - AJOUTÉ -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Compte source :" style="-fx-font-size: 16px;"/>
+                <TextField fx:id="compteSourceField" promptText="Numéro de compte"/>
+            </HBox>
+
+            <!-- Destinataire pour virement - CORRIGÉ -->
+            <HBox spacing="10" alignment="CENTER_LEFT" visible="false" fx:id="destinataireBox">
+                <Label text="Compte destinataire :" style="-fx-font-size: 16px;"/>
+                <TextField fx:id="compteDestField" promptText="Compte du destinataire"/>
+            </HBox>
+
+            <!-- Bouton de validation -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="💰 Effectuer Transaction" fx:id="btnEffectuerTransaction"
+                        onAction="#handleTransaction" style="-fx-font-size: 14px; -fx-background-color: #27AE60; -fx-text-fill: white;"/>
+                <Button text="❌ Annuler" fx:id="btnAnnulerTransaction"
+                        onAction="#clearFields" style="-fx-font-size: 14px; -fx-background-color: #E74C3C; -fx-text-fill: white;"/>
+            </HBox>
+
+            <!-- Historique des Transactions -->
+            <Label text="🔍 Historique des Transactions" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tableTransactions" prefHeight="200" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="150"/>
+                    <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
+                    <TableColumn fx:id="colMontant" text="Montant" prefWidth="100"/>
+                    <TableColumn fx:id="colStatut" text="Statut" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupeisi.minisystemebancaire.controllers.client.ClientDashboardController">
+    
+    <!-- Sidebar à gauche -->
+    <left>
+        <VBox alignment="TOP_LEFT" spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 18px;" text="🏦 Mini Système Bancaire" />
+            <Button fx:id="btnDashboard" style="-fx-pref-width: 180px;" text="🏠 Tableau de Bord" />
+            <Button fx:id="btnTransactions" onAction="#goToTransactions" style="-fx-pref-width: 180px;" text="🔄 Transactions" />
+            <Button fx:id="btnCredits" onAction="#goToCredits" style="-fx-pref-width: 180px;" text="🏦 Crédits" />
+            <Button fx:id="btnCartes" onAction="#goToCartes" style="-fx-pref-width: 180px;" text="💳 Cartes Bancaires" />
+            <Button fx:id="btnSupport" onAction="#goToSupport" style="-fx-pref-width: 180px;" text="📩 Service Client" />
+            <Button fx:id="btnDeconnexion" onAction="#handleLogout" style="-fx-pref-width: 180px; -fx-background-color: red; -fx-text-fill: white;" text="🚪 Déconnexion" />
+        </VBox>
+    </left>
+
+    <!-- Contenu principal (Dynamique) -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20;">
+            
+            <!-- Solde Actuel -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="montant Actuel :" />
+                <TextField fx:id="txtSolde" disable="true" editable="false" style="-fx-font-size: 16px;" text="200 000 FCFA" />
+            </HBox>
+
+            <!-- Actions Rapides -->
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Actions Rapides" />
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="btnDepot" style="-fx-font-size: 14px;" text="➕ Dépôt" />
+                <Button fx:id="btnRetrait" style="-fx-font-size: 14px;" text="➖ Retrait" />
+                <Button fx:id="btnVirement" style="-fx-font-size: 14px;" text="➡ Virement" />
+            </HBox>
+
+            <!-- Historique des Transactions -->
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="🔍 Historique des Transactions" />
+            <TableView fx:id="tableTransactions" prefHeight="200" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colDate" prefWidth="120" text="Date" />
+                    <TableColumn fx:id="colType" prefWidth="100" text="Type" />
+                    <TableColumn fx:id="colMontant" prefWidth="100" text="Montant" />
+                    <TableColumn fx:id="colStatut" prefWidth="100" text="Statut" />
+                </columns>
+            </TableView>
+
+
+        </VBox>
+    </center>
+
+</BorderPane>

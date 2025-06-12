@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane fx:id="mainContainer" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupeisi.minisystemebancaire.controllers.admin.AdminDashboardController">
+
+    <!-- Sidebar à gauche -->
+    <left>
+        <VBox spacing="10" alignment="TOP_LEFT" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label text="🏦 Mini Système Bancaire" style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+            <Button text="🏠 Tableau de Bord" fx:id="btnDashboard" style="-fx-pref-width: 180px;"/>
+            <Button text="👥 Gestion des Clients" fx:id="btnClients" onAction="#handleGestionClients" style="-fx-pref-width: 180px;"/>
+            <Button text="💰 Gestion des Comptes" fx:id="btnComptes" onAction="#handleGestionComptes" style="-fx-pref-width: 180px;"/>
+            <Button text="🔄 Gestion des Transactions" fx:id="btnTransactions" onAction="#handleGestionTransactions" style="-fx-pref-width: 180px;"/>
+            <Button text="🏦 Gestion des Crédits" fx:id="btnCredits" onAction="#handleGestionCredits" style="-fx-pref-width: 180px;"/>
+            <Button text="💳 Gestion des Cartes Bancaires" fx:id="btnCartes" onAction="#handleGestionCartes" style="-fx-pref-width: 180px;"/>
+            <Button text="📩 Service Client &amp; Rapports" fx:id="btnSupport" onAction="#handleGestionSupport" style="-fx-pref-width: 180px;"/>
+            <Button text="🚪 Déconnexion" fx:id="btnDeconnexion" onAction="#handleDeconnexion" style="-fx-pref-width: 180px; -fx-background-color: red; -fx-text-fill: white;"/>
+        </VBox>
+    </left>
+
+    <!-- Contenu principal -->
+    <center>
+        <VBox spacing="20" alignment="TOP_CENTER" style="-fx-padding: 20;">
+
+            <!-- Titre -->
+            <Label text="📊 Tableau de Bord - Administration" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <!-- Indicateurs clés -->
+            <HBox spacing="30" alignment="CENTER">
+                <VBox alignment="CENTER" style="-fx-background-color: #3498DB; -fx-padding: 15; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <Label text="👥 Nombre de Clients" style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+                    <Label fx:id="lblNbClients" text="0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" style="-fx-background-color: #2ECC71; -fx-padding: 15; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <Label text="💰 Total Comptes" style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+                    <Label fx:id="lblNbComptes" text="0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" style="-fx-background-color: #E74C3C; -fx-padding: 15; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <Label text="🔄 Transactions" style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+                    <Label fx:id="lblNbTransactions" text="0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" style="-fx-background-color: #F1C40F; -fx-padding: 15; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <Label text="💳 Cartes Actives" style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+                    <Label fx:id="lblNbCartes" text="0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Analyse des opérations suspectes -->
+            <Label text="⚠️ Opérations Suspectes" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tableOperationsSuspectes" prefHeight="200" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colIdOpSuspecte" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colMontantOpSuspecte" text="Montant" prefWidth="100"/>
+                    <TableColumn fx:id="colTypeOpSuspecte" text="Type" prefWidth="100"/>
+                    <TableColumn fx:id="colCompteSourceOp" text="Source" prefWidth="150"/>
+                    <TableColumn fx:id="colDateOpSuspecte" text="Date" prefWidth="120"/>
+                </columns>
+            </TableView>
+
+            <!-- Système de gestion des réclamations -->
+            <Label text="📩 Réclamations Clients" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tableReclamations" prefHeight="200" prefWidth="600">
+                <columns>
+                    <TableColumn fx:id="colIdReclamation" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colClientReclamation" text="Client" prefWidth="150"/>
+                    <TableColumn fx:id="colSujetReclamation" text="Sujet" prefWidth="200"/>
+                    <TableColumn fx:id="colStatutReclamation" text="Statut" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="✉ Répondre" fx:id="btnRepondreReclamation" onAction="#handleRepondreReclamation"  style="-fx-font-size: 14px;"/>
+                <Button text="✅ Marquer comme Résolu" fx:id="btnResoudreReclamation" onAction="#handleResoudreReclamation" style="-fx-font-size: 14px;"/>
+            </HBox>
+
+            <!-- Application des frais bancaires -->
+            <Label text="💰 Application des Frais Bancaires" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <GridPane hgap="10" vgap="10">
+                <Label text="Compte :" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <ChoiceBox fx:id="choiceCompteFrais" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Type de Frais :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <ChoiceBox fx:id="choiceTypeFrais" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Montant :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="txtMontantFrais" promptText="Montant" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="💰 Appliquer" fx:id="btnAppliquerFrais" onAction="#handleAppliquerFrais" style="-fx-font-size: 14px;"/>
+            </HBox>
+
+            <!-- Boutons de mise à jour -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="🔄 Rafraîchir" fx:id="btnRafraichirDashboard" onAction="#handleRafraichirDashboard" style="-fx-font-size: 14px;"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
